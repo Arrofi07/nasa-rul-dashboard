@@ -29,8 +29,17 @@ warnings.filterwarnings("ignore")
 # Config
 # ---------------------------------------------------------------------------
 
-API_URL = os.environ.get("API_URL", "http://127.0.0.1:8000")
-# API_URL = os.environ.get("API_URL", "https://nasa-rul-mle-production.up.railway.app")
+API_URL = os.environ.get(
+    "API_URL",
+    "https://nasa-rul-mle-production.up.railway.app"
+)
+try:
+    API_URL = st.secrets["API_URL"]
+except Exception:
+    API_URL = os.getenv(
+        "API_URL",
+        "http://127.0.0.1:8000",
+    )
 PROCESSED_DIR = "data/processed"
 
 # DROPPED_SENSORS = {"sensor_1", "sensor_5", "sensor_10", "sensor_16", "sensor_18", "sensor_19"}
